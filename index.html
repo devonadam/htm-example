@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="./node_modules/htm/dist/htm.umd.js "></script>
+</head>
+<body>
+    <h1>htm test</h1>
+    
+    <script>
+        let {log} = console
+        // log(Reflect.ownKeys(htm.prototype)) // ??
+        const html = htm.bind(h);
+
+        function h(a,b,c) {
+            console.log(a,b,c);
+
+            let el=document.createElement(a)
+            if(typeof c==="string") el.textContent=c;
+            if(b.onClick) el.onclick=b.onClick
+            document.body.appendChild(el)
+        }
+
+        let cbfn=() => {log('click')}
+
+        let test = html`<p onClick=${cbfn}>test</p>`
+        log(test)
+    </script>
+</body>
+</html>
